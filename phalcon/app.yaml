@@ -1,5 +1,7 @@
 runtime: php
 env: flex
 
+service: phalcon
+
 runtime_config:
   document_root: public
