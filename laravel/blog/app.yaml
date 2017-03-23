@@ -6,7 +6,7 @@ service: laravel
 runtime_config:
   document_root: public
 
-env:
+env_variables:
   DB_SOCKET: /cloudsql/chingor-php-gcs:us-central1:php-test-apps
   DB_USERNAME: blog
   DB_PASSWORD: blog
