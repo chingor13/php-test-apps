@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf8d83bd2ed7a072e2f3d135ce4dd9a0",
+    "content-hash": "8b50aebef39c7fc49ce81a67fa3adf71",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -242,11 +242,10 @@
         {
             "name": "google/cloud",
             "version": "dev-request_tracing",
-            "dist": {
-                "type": "path",
-                "url": "../../../google-cloud-php",
-                "reference": "8df022f028fc7c1f64e4046b63b54ba4f9cef59b",
-                "shasum": null
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chingor13/google-cloud-php",
+                "reference": "daae39de95a3d7b805045db259842652180f71f6"
             },
             "require": {
                 "google/auth": "^0.11",
@@ -336,7 +335,8 @@
                 "translate",
                 "translation",
                 "vision"
-            ]
+            ],
+            "time": "2017-03-23 23:18:08"
         },
         {
             "name": "guzzlehttp/guzzle",
