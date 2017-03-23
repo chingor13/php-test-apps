@@ -1,0 +1,13 @@
+{
+    "name": "chingor/phalcon",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Jeff Ching",
+            "email": "chingor@google.com"
+        }
+    ],
+    "require": {
+        "php": "7.0.*"
+    }
+}

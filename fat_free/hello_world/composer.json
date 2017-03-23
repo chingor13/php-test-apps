@@ -1,0 +1,13 @@
+{
+    "name": "chingor/hello_world",
+    "type": "project",
+    "require": {
+        "bcosca/fatfree": "^3.6"
+    },
+    "authors": [
+        {
+            "name": "Jeff Ching",
+            "email": "chingor@google.com"
+        }
+    ]
+}

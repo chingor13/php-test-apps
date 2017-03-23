@@ -1,0 +1,5 @@
+runtime: custom
+env: flex
+
+env_variables:
+  DOCUMENT_ROOT: /app/public
