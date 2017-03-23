@@ -17,8 +17,8 @@
     },
     "repositories": [
         {
-            "type": "git",
-            "url": "https://github.com/chingor13/google-cloud-php"
+            "type": "path",
+            "url": "../../../google-cloud-php"
         }
     ],
     "autoload": {
