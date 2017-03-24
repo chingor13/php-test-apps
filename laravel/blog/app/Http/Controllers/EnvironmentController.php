@@ -8,7 +8,7 @@ class EnvironmentController extends Controller
 {
     public function index()
     {
-        return json_encode($_ENV);
+        return response()->json($_ENV);
     }
 
 }
