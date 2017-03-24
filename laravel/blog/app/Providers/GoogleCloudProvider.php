@@ -7,13 +7,9 @@ use Google\Cloud\ServiceBuilder;
 use Google\Cloud\Trace\RequestTracer;
 use Google\Cloud\Trace\Reporter\EchoReporter;
 use Google\Cloud\Trace\Reporter\TraceReporter;
-use Psr\Cache\CacheItemPoolInterface;
-
 
 class GoogleCloudProvider extends ServiceProvider
 {
-    private $builder;
-
     /**
      * Bootstrap the application services.
      *

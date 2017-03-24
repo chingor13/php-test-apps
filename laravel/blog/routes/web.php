@@ -25,3 +25,4 @@ Route::post('/login', 'SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
 
 Route::get('/error', 'ErrorController@index');
+Route::get('/env', 'EnvironmentController@index');
