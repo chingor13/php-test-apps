@@ -14,3 +14,4 @@ env_variables:
   DB_USERNAME: blog
   DB_PASSWORD: blog
   DB_DATABASE: blog
+  APP_ENV: production
