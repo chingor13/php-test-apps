@@ -15,12 +15,8 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = RequestTracer::instrument(['name' => 'db/posts/latest'], function() {
-            return Post::latest()->get();
-        });
-        return RequestTracer::instrument(['name' => 'view'], function () use ($posts) {
-            return view('posts.index', compact('posts'));
-        });
+        $posts = Post::latest()->get();
+        return view('posts.index', compact('posts'));
     }
 
     public function show(Post $post)

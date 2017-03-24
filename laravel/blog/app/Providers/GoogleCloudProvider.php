@@ -7,6 +7,8 @@ use Google\Cloud\ServiceBuilder;
 use Google\Cloud\Trace\RequestTracer;
 use Google\Cloud\Trace\Reporter\EchoReporter;
 use Google\Cloud\Trace\Reporter\TraceReporter;
+use Psr\Cache\CacheItemPoolInterface;
+
 
 class GoogleCloudProvider extends ServiceProvider
 {
@@ -25,7 +27,10 @@ class GoogleCloudProvider extends ServiceProvider
 
         // don't trace if we're running in the console (i.e. a php artisan command)
         if (php_sapi_name() != 'cli') {
-            RequestTracer::start($trace, $reporter, ['enabled' => true, 'startTime' => LARAVEL_START]);
+            RequestTracer::start($trace, $reporter, [
+                'enabled' => true,
+                'startTime' => LARAVEL_START
+            ]);
             RequestTracer::retroSpan(
                 microtime(true) - LARAVEL_START,
                 [

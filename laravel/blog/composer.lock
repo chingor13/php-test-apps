@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b50aebef39c7fc49ce81a67fa3adf71",
+    "content-hash": "a73fb1f0423966603b8ed52bbbaabd61",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -245,7 +245,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chingor13/google-cloud-php",
-                "reference": "daae39de95a3d7b805045db259842652180f71f6"
+                "reference": "6b25ed0cf5fac12555b33e3671633ddbf07b88a0"
             },
             "require": {
                 "google/auth": "^0.11",
@@ -336,7 +336,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2017-03-23 23:18:08"
+            "time": "2017-03-24 20:33:15"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -872,6 +872,54 @@
                 "storage"
             ],
             "time": "2017-03-22T15:43:14+00:00"
+        },
+        {
+            "name": "madewithlove/illuminate-psr-cache-bridge",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/madewithlove/illuminate-psr-cache-bridge.git",
+                "reference": "b7ecb2407419830a82974c6bb75c75ca0399e0f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/madewithlove/illuminate-psr-cache-bridge/zipball/b7ecb2407419830a82974c6bb75c75ca0399e0f0",
+                "reference": "b7ecb2407419830a82974c6bb75c75ca0399e0f0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^5.0",
+                "php": ">=5.6.0",
+                "psr/cache": "^1.0"
+            },
+            "provide": {
+                "psr/cache-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "cache/integration-tests": "^0.10.0",
+                "illuminate/cache": "^5.0",
+                "nesbot/carbon": "^1.3.0",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Madewithlove\\IlluminatePsrCacheBridge\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "keywords": [
+                "Bridge",
+                "adapter",
+                "cache",
+                "implementation",
+                "laravel",
+                "psr-6"
+            ],
+            "time": "2016-07-02T12:18:40+00:00"
         },
         {
             "name": "monolog/monolog",
