@@ -1,7 +1,7 @@
 
 <div class="sidebar-module sidebar-module-inset">
 <h4>About</h4>
-<p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+<p>This is a test application running Laravel 5.4</p>
 </div>
 <div class="sidebar-module">
 <h4>Archives</h4>
@@ -23,8 +23,8 @@
 <div class="sidebar-module">
 <h4>Elsewhere</h4>
 <ol class="list-unstyled">
-  <li><a href="#">GitHub</a></li>
-  <li><a href="#">Twitter</a></li>
-  <li><a href="#">Facebook</a></li>
+  <li><a href="https://github.com/chingor13/php-test-apps/tree/master/laravel/blog">GitHub</a></li>
+  <li><a href="https://twitter.com/">Twitter</a></li>
+  <li><a href="https://facebook.com/">Facebook</a></li>
 </ol>
 </div>

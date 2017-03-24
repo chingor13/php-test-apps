@@ -15,3 +15,4 @@ env_variables:
   DB_PASSWORD: blog
   DB_DATABASE: blog
   APP_ENV: production
+  SESSION_DRIVER: cookie
