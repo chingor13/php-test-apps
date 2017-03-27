@@ -1,0 +1,9 @@
+<div class="blog-post">
+    <h2 class="blog-post-title">
+        <a href="/posts/{{ post.permalink }}">{{ post.title }}</a>
+    </h2>
+    <p class="blog-post-meta">
+        {{ post.createdAt|date("m/d/Y") }}
+    </p>
+    {{ post.body }}
+</div>
