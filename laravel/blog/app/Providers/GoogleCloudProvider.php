@@ -8,8 +8,10 @@ use Google\Cloud\Trace\TraceClient;
 use Google\Cloud\Trace\RequestTracer;
 use Google\Cloud\Trace\Reporter\EchoReporter;
 use Google\Cloud\Trace\Reporter\TraceReporter;
+use Google\Cloud\Trace\Reporter\ReporterInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Madewithlove\IlluminatePsrCacheBridge\Laravel\CacheItem;
+use Illuminate\Database\Events\QueryExecuted;
 
 class GoogleCloudProvider extends ServiceProvider
 {
@@ -18,38 +20,37 @@ class GoogleCloudProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(TraceClient $trace, CacheItemPoolInterface $cache)
+    public function boot(ReporterInterface $reporter, CacheItemPoolInterface $cache)
     {
         // don't trace if we're running in the console (i.e. a php artisan command)
         if (php_sapi_name() == 'cli') {
             return;
         }
 
-        $reporter = new TraceReporter($trace);
-        RequestTracer::start($trace, $reporter, [
+        // start the root span
+        RequestTracer::start($reporter, [
             'qps' => [
                 'cache' => $cache,
                 'cacheItemClass' => CacheItem::class
             ],
             'startTime' => LARAVEL_START
         ]);
-        RequestTracer::retroSpan(
-            microtime(true) - LARAVEL_START,
-            [
-                'name' => 'bootstrap'
-            ]
-        );
 
-        \Event::listen('Illuminate\Database\Events\QueryExecuted', function($event) {
-            RequestTracer::retroSpan(
-                $event->time * 0.001,
-                [
-                    'name' => $event->connectionName,
-                    'labels' => [
-                        'query' => $event->sql
-                    ]
-                ]
+        // create a span from the initial start time until now as 'bootstrap'
+        RequestTracer::startSpan(['name' => 'bootstrap', 'startTime' => LARAVEL_START]);
+        RequestTracer::finishSpan();
+
+        // For every Eloquent query execute, create a span with the query as a label
+        \Event::listen(QueryExecuted::class, function(QueryExecuted $event) {
+            $startTime = microtime(true) - $event->time * 0.001;
+            RequestTracer::startSpan([
+                'name' => $event->connectionName,
+                'labels' => [
+                    'query' => $event->sql
+                ],
+                'startTime' => $startTime]
             );
+            RequestTracer::finishSpan();
         });
     }
 
@@ -66,13 +67,17 @@ class GoogleCloudProvider extends ServiceProvider
         $this->app->singleton(TraceClient::class, function($app) {
             return $app->make(ServiceBuilder::class)->trace();
         });
+        $this->app->singleton(ReporterInterface::class, function($app) {
+            return new TraceReporter($app->make(TraceClient::class));
+        });
     }
 
     public function provides()
     {
         return [
             ServiceBuilder::class,
-            TraceClient::class
+            TraceClient::class,
+            TraceReporterInterface::class
         ];
     }
 }
