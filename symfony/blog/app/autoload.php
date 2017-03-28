@@ -1,5 +1,7 @@
 <?php
 
+define('SYMFONY_START', microtime(true));
+
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Composer\Autoload\ClassLoader;
 
