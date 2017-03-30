@@ -6,11 +6,12 @@ use Illuminate\Support\ServiceProvider;
 use Google\Cloud\ServiceBuilder;
 use Google\Cloud\Trace\TraceClient;
 use Google\Cloud\Trace\RequestTracer;
-use Google\Cloud\Trace\Reporter\EchoReporter;
-use Google\Cloud\Trace\Reporter\TraceReporter;
+use Google\Cloud\Trace\Reporter\SyncReporter;
 use Google\Cloud\Trace\Reporter\ReporterInterface;
+use Google\Cloud\Trace\Sampler\SamplerInterface;
+use Google\Cloud\Trace\Sampler\QpsSampler;
 use Psr\Cache\CacheItemPoolInterface;
-use Madewithlove\IlluminatePsrCacheBridge\Laravel\CacheItem;
+use Psr\Cache\CacheItemInterface;
 use Illuminate\Database\Events\QueryExecuted;
 
 class GoogleCloudProvider extends ServiceProvider
@@ -20,7 +21,7 @@ class GoogleCloudProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(ReporterInterface $reporter, CacheItemPoolInterface $cache)
+    public function boot(ReporterInterface $reporter, SamplerInterface $sampler)
     {
         // don't trace if we're running in the console (i.e. a php artisan command)
         if (php_sapi_name() == 'cli') {
@@ -29,11 +30,7 @@ class GoogleCloudProvider extends ServiceProvider
 
         // start the root span
         RequestTracer::start($reporter, [
-            'qps' => [
-                'cache' => $cache,
-                'cacheItemClass' => CacheItem::class
-            ],
-            'startTime' => LARAVEL_START
+            'sampler' => $sampler
         ]);
 
         // create a span from the initial start time until now as 'bootstrap'
@@ -68,7 +65,13 @@ class GoogleCloudProvider extends ServiceProvider
             return $app->make(ServiceBuilder::class)->trace();
         });
         $this->app->singleton(ReporterInterface::class, function($app) {
-            return new TraceReporter($app->make(TraceClient::class));
+            return new SyncReporter($app->make(TraceClient::class));
+        });
+        $this->app->singleton(SamplerInterface::class, function($app) {
+            return new QpsSampler(
+                $app->make(CacheItemPoolInterface::class),
+                get_class($app->make(CacheItemInterface::class))
+            );
         });
     }
 
@@ -77,7 +80,8 @@ class GoogleCloudProvider extends ServiceProvider
         return [
             ServiceBuilder::class,
             TraceClient::class,
-            TraceReporterInterface::class
+            ReporterInterface::class,
+            SamplerInterface::class
         ];
     }
 }
