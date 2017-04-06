@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Google\Cloud\ServiceBuilder;
 use Google\Cloud\Trace\TraceClient;
 use Google\Cloud\Trace\RequestTracer;
+use Google\Cloud\Trace\Reporter\EchoReporter;
 use Google\Cloud\Trace\Reporter\SyncReporter;
 use Google\Cloud\Trace\Reporter\ReporterInterface;
 use Google\Cloud\Trace\Sampler\SamplerInterface;
@@ -30,7 +31,7 @@ class GoogleCloudProvider extends ServiceProvider
 
         // start the root span
         RequestTracer::start($reporter, [
-            'sampler' => $sampler
+            'sampler' => ['type' => 'enabled']
         ]);
 
         // create a span from the initial start time until now as 'bootstrap'
@@ -45,8 +46,8 @@ class GoogleCloudProvider extends ServiceProvider
                 'labels' => [
                     'query' => $event->sql
                 ],
-                'startTime' => $startTime]
-            );
+                'startTime' => $startTime
+            ]);
             RequestTracer::finishSpan();
         });
     }
@@ -65,6 +66,7 @@ class GoogleCloudProvider extends ServiceProvider
             return $app->make(ServiceBuilder::class)->trace();
         });
         $this->app->singleton(ReporterInterface::class, function($app) {
+            // return new EchoReporter();
             return new SyncReporter($app->make(TraceClient::class));
         });
         $this->app->singleton(SamplerInterface::class, function($app) {

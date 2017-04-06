@@ -5,6 +5,7 @@ namespace Google\Symfony;
 use Google\Cloud\ServiceBuilder;
 use Google\Cloud\Trace\RequestTracer;
 use Google\Cloud\Trace\Reporter\SyncReporter;
+use Google\Cloud\Trace\Reporter\EchoReporter;
 use Google\Cloud\Trace\Sampler\QpsSampler;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -25,7 +26,8 @@ class GoogleBundle extends Bundle
         }
         $builder = new ServiceBuilder(['projectId' => 'chingor-php-gcs']);
         $trace = $builder->trace();
-        $reporter = new SyncReporter($trace);
+        // $reporter = new SyncReporter($trace);
+        $reporter = new EchoReporter();
 
         RequestTracer::start($reporter);
 
@@ -33,6 +35,7 @@ class GoogleBundle extends Bundle
         RequestTracer::startSpan(['name' => 'bootstrap', 'startTime' => SYMFONY_START]);
         RequestTracer::finishSpan();
 
+        // track all sql queries as spans
         $doctrine = $this->container->get('doctrine');
         $em = $doctrine->getConnection();
         $stack = new QueryLogger();

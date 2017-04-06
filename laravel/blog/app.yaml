@@ -19,3 +19,4 @@ env_variables:
   DB_DATABASE: blog
   APP_ENV: production
   SESSION_DRIVER: cookie
+  APP_KEY: base64:tfe3iIAnezVntaOSbmaOGUqoXMK99qyjzQPcE7b+s0I=
