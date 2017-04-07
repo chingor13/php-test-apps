@@ -1,0 +1,22 @@
+runtime: custom
+env: flex
+
+service: custom
+
+runtime_config:
+  document_root: public
+
+skip_files:
+- ^\.env.*$
+
+beta_settings:
+  cloud_sql_instances: chingor-php-gcs:us-central1:php-test-apps
+
+env_variables:
+  DB_SOCKET: /cloudsql/chingor-php-gcs:us-central1:php-test-apps
+  DB_USERNAME: blog
+  DB_PASSWORD: blog
+  DB_DATABASE: blog
+  APP_ENV: production
+  SESSION_DRIVER: cookie
+  APP_KEY: base64:tfe3iIAnezVntaOSbmaOGUqoXMK99qyjzQPcE7b+s0I=
