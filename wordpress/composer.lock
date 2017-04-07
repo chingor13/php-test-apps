@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "233deec92bafd986e1106a13ad8da6aa",
+    "content-hash": "8af71bc9faaab4b34ad1c3b7c82bfb76",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -99,17 +99,11 @@
         },
         {
             "name": "google/cloud",
-            "version": "v0.25.1",
+            "version": "dev-request_tracing",
             "source": {
                 "type": "git",
-                "url": "https://github.com/GoogleCloudPlatform/google-cloud-php.git",
-                "reference": "24a5fab3a9b2e125a6fe6fece1840537388710ac"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/GoogleCloudPlatform/google-cloud-php/zipball/24a5fab3a9b2e125a6fe6fece1840537388710ac",
-                "reference": "24a5fab3a9b2e125a6fe6fece1840537388710ac",
-                "shasum": ""
+                "url": "https://github.com/chingor13/google-cloud-php",
+                "reference": "9e8235059c9f0bfd9de336a62e2772a478f830bf"
             },
             "require": {
                 "google/auth": "^0.11",
@@ -123,7 +117,8 @@
             "require-dev": {
                 "erusev/parsedown": "^1.6",
                 "google/gax": "^0.8",
-                "google/proto-client-php": "^0.10",
+                "google/proto-client-php": "^0.9",
+                "james-heinrich/getid3": "^1.9",
                 "league/json-guard": "^0.3",
                 "phpdocumentor/reflection": "^3.0",
                 "phpunit/phpunit": "4.8.*",
@@ -133,7 +128,8 @@
             },
             "suggest": {
                 "google/gax": "Required to support gRPC",
-                "google/proto-client-php": "Required to support gRPC"
+                "google/proto-client-php": "Required to support gRPC",
+                "james-heinrich/getid3": "Allows the Google Cloud Speech client to determine sample rate and encoding of audio inputs"
             },
             "type": "library",
             "extra": {
@@ -149,18 +145,28 @@
                     "Google\\Cloud\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Google\\Cloud\\Dev\\": "dev/src",
+                    "Google\\Cloud\\Tests\\System\\": "tests/system"
+                }
+            },
+            "scripts": {
+                "google-cloud": [
+                    "dev/google-cloud"
+                ]
+            },
             "license": [
                 "Apache-2.0"
             ],
             "authors": [
                 {
-                    "name": "John Pedrie",
-                    "email": "john@pedrie.com"
-                },
-                {
                     "name": "Dave Supplee",
                     "email": "dwsupplee@gmail.com"
+                },
+                {
+                    "name": "John Pedrie",
+                    "email": "john@pedrie.com"
                 }
             ],
             "description": "Google Cloud Client Library",
@@ -188,7 +194,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2017-04-05T20:45:03+00:00"
+            "time": "2017-04-07 16:47:51"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2069,9 +2075,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "google/cloud": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.6.4"
+    },
     "platform-dev": []
 }
