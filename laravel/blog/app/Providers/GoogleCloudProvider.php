@@ -7,6 +7,7 @@ use Google\Cloud\ServiceBuilder;
 use Google\Cloud\Trace\TraceClient;
 use Google\Cloud\Trace\RequestTracer;
 use Google\Cloud\Trace\Reporter\EchoReporter;
+use Google\Cloud\Trace\Reporter\FileReporter;
 use Google\Cloud\Trace\Reporter\SyncReporter;
 use Google\Cloud\Trace\Reporter\ReporterInterface;
 use Google\Cloud\Trace\Sampler\SamplerInterface;
@@ -31,7 +32,7 @@ class GoogleCloudProvider extends ServiceProvider
 
         // start the root span
         RequestTracer::start($reporter, [
-            'sampler' => ['type' => 'enabled']
+            'sampler' => $sampler
         ]);
 
         // create a span from the initial start time until now as 'bootstrap'
@@ -66,6 +67,7 @@ class GoogleCloudProvider extends ServiceProvider
             return $app->make(ServiceBuilder::class)->trace();
         });
         $this->app->singleton(ReporterInterface::class, function($app) {
+            // return new FileReporter("/tmp/spans.log");
             // return new EchoReporter();
             return new SyncReporter($app->make(TraceClient::class));
         });
