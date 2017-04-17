@@ -68,8 +68,8 @@ class GoogleCloudProvider extends ServiceProvider
         });
         $this->app->singleton(ReporterInterface::class, function($app) {
             // return new FileReporter("/tmp/spans.log");
-            return new EchoReporter();
-            // return new SyncReporter($app->make(TraceClient::class));
+            // return new EchoReporter();
+            return new SyncReporter($app->make(TraceClient::class));
         });
         $this->app->singleton(SamplerInterface::class, function($app) {
             return new QpsSampler(
