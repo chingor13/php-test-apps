@@ -37,7 +37,7 @@ class GoogleCloudProvider extends ServiceProvider
 
         // create a span from the initial start time until now as 'bootstrap'
         RequestTracer::startSpan(['name' => 'bootstrap', 'startTime' => LARAVEL_START]);
-        RequestTracer::finishSpan();
+        RequestTracer::endSpan();
 
         // For every Eloquent query execute, create a span with the query as a label
         \Event::listen(QueryExecuted::class, function(QueryExecuted $event) {
@@ -49,7 +49,7 @@ class GoogleCloudProvider extends ServiceProvider
                 ],
                 'startTime' => $startTime
             ]);
-            RequestTracer::finishSpan();
+            RequestTracer::endSpan();
         });
     }
 
@@ -68,8 +68,8 @@ class GoogleCloudProvider extends ServiceProvider
         });
         $this->app->singleton(ReporterInterface::class, function($app) {
             // return new FileReporter("/tmp/spans.log");
-            // return new EchoReporter();
-            return new SyncReporter($app->make(TraceClient::class));
+            return new EchoReporter();
+            // return new SyncReporter($app->make(TraceClient::class));
         });
         $this->app->singleton(SamplerInterface::class, function($app) {
             return new QpsSampler(

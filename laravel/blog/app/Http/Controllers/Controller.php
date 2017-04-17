@@ -26,7 +26,7 @@ function view($view = null, $data = [], $mergeData = [])
         return $factory;
     }
 
-    return RequestTracer::instrument(['name' => 'view/' . $view], function () use ($factory, $view, $data, $mergeData) {
+    return RequestTracer::inSpan(['name' => 'view/' . $view], function () use ($factory, $view, $data, $mergeData) {
         return $factory->make($view, $data, $mergeData);
     });
 }
