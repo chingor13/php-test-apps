@@ -26,14 +26,14 @@ class GoogleBundle extends Bundle
         }
         $builder = new ServiceBuilder(['projectId' => 'chingor-php-gcs']);
         $trace = $builder->trace();
-        // $reporter = new SyncReporter($trace);
-        $reporter = new EchoReporter();
+        $reporter = new SyncReporter($trace);
+        // $reporter = new EchoReporter();
 
         RequestTracer::start($reporter);
 
         // create a span from the initial start time until now as 'bootstrap'
         RequestTracer::startSpan(['name' => 'bootstrap', 'startTime' => SYMFONY_START]);
-        RequestTracer::finishSpan();
+        RequestTracer::endSpan();
 
         // track all sql queries as spans
         $doctrine = $this->container->get('doctrine');

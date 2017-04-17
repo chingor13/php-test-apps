@@ -965,7 +965,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chingor13/google-cloud-php",
-                "reference": "544eeb213675fc1f6ba7c9c76ccd94f7a67429ce"
+                "reference": "be739639bda3077d3207ee9aba13cf7b4bf2130e"
             },
             "require": {
                 "google/auth": "^0.11",
@@ -979,8 +979,7 @@
             "require-dev": {
                 "erusev/parsedown": "^1.6",
                 "google/gax": "^0.8",
-                "google/proto-client-php": "^0.9",
-                "james-heinrich/getid3": "^1.9",
+                "google/proto-client-php": "^0.11",
                 "league/json-guard": "^0.3",
                 "phpdocumentor/reflection": "^3.0",
                 "phpunit/phpunit": "4.8.*",
@@ -990,8 +989,7 @@
             },
             "suggest": {
                 "google/gax": "Required to support gRPC",
-                "google/proto-client-php": "Required to support gRPC",
-                "james-heinrich/getid3": "Allows the Google Cloud Speech client to determine sample rate and encoding of audio inputs"
+                "google/proto-client-php": "Required to support gRPC"
             },
             "type": "library",
             "extra": {
@@ -1046,6 +1044,7 @@
                 "google apis client",
                 "google cloud",
                 "google cloud platform",
+                "language",
                 "natural language",
                 "pub sub",
                 "pubsub",
@@ -1056,7 +1055,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2017-03-30 16:58:04"
+            "time": "2017-04-17 20:57:34"
         },
         {
             "name": "guzzlehttp/guzzle",
