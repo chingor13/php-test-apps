@@ -1,7 +1,7 @@
 {
     "require": {
         "php": ">=5.6.4",
-        "google/cloud": "dev-request_tracing"
+        "google/cloud": "dev-tracing"
     },
     "require-dev": {
         "wp-cli/wp-cli": "~1.1"

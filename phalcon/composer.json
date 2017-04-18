@@ -10,7 +10,7 @@
     "require": {
         "php": "7.0.*",
         "ext-phalcon": "*",
-        "google/cloud": "dev-request_tracing"
+        "google/cloud": "dev-tracing"
     },
     "repositories": [
         {

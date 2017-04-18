@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "905551521cd26d491e1eae86ce33bc32",
+    "content-hash": "86f0335a5b03e362a0eba94b71c0bf5d",
     "packages": [
         {
             "name": "cache/cache",
@@ -961,11 +961,11 @@
         },
         {
             "name": "google/cloud",
-            "version": "dev-request_tracing",
+            "version": "dev-tracing",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chingor13/google-cloud-php",
-                "reference": "be739639bda3077d3207ee9aba13cf7b4bf2130e"
+                "reference": "6e034a77b7fb86694f847788303e9b04eeaae034"
             },
             "require": {
                 "google/auth": "^0.11",
@@ -1055,7 +1055,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2017-04-17 20:57:34"
+            "time": "2017-04-18 18:43:56"
         },
         {
             "name": "guzzlehttp/guzzle",
