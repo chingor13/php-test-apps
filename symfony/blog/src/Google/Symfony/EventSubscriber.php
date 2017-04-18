@@ -35,17 +35,17 @@ class EventSubscriber implements EventSubscriberInterface
 
     public function processView(GetResponseForControllerResultEvent $event)
     {
-        RequestTracer::finishSpan();
+        RequestTracer::endSpan();
         RequestTracer::startSpan(['name' => 'view']);
     }
 
     public function processFinish(FinishRequestEvent $event)
     {
         // should complete the controller or view span
-        RequestTracer::finishSpan();
+        RequestTracer::endSpan();
 
         // should complete the request span
-        RequestTracer::finishSpan();
+        RequestTracer::endSpan();
     }
 
 }

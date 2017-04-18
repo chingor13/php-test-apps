@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a73fb1f0423966603b8ed52bbbaabd61",
+    "content-hash": "a2a5786d11b65b9cd6267f1d98e7eea5",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -241,11 +241,11 @@
         },
         {
             "name": "google/cloud",
-            "version": "dev-request_tracing",
+            "version": "dev-tracing",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chingor13/google-cloud-php",
-                "reference": "40e8065f438795486202653143fafe28c631b0c9"
+                "reference": "6e034a77b7fb86694f847788303e9b04eeaae034"
             },
             "require": {
                 "google/auth": "^0.11",
@@ -259,8 +259,7 @@
             "require-dev": {
                 "erusev/parsedown": "^1.6",
                 "google/gax": "^0.8",
-                "google/proto-client-php": "^0.9",
-                "james-heinrich/getid3": "^1.9",
+                "google/proto-client-php": "^0.11",
                 "league/json-guard": "^0.3",
                 "phpdocumentor/reflection": "^3.0",
                 "phpunit/phpunit": "4.8.*",
@@ -270,8 +269,7 @@
             },
             "suggest": {
                 "google/gax": "Required to support gRPC",
-                "google/proto-client-php": "Required to support gRPC",
-                "james-heinrich/getid3": "Allows the Google Cloud Speech client to determine sample rate and encoding of audio inputs"
+                "google/proto-client-php": "Required to support gRPC"
             },
             "type": "library",
             "extra": {
@@ -326,6 +324,7 @@
                 "google apis client",
                 "google cloud",
                 "google cloud platform",
+                "language",
                 "natural language",
                 "pub sub",
                 "pubsub",
@@ -336,7 +335,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2017-04-06 23:53:17"
+            "time": "2017-04-18 18:43:56"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2572,12 +2571,12 @@
             "version": "0.9.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856",
                 "shasum": ""
             },

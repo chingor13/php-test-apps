@@ -1,4 +1,4 @@
-runtime: php
+runtime: custom
 env: flex
 
 service: silex

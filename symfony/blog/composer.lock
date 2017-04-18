@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "905551521cd26d491e1eae86ce33bc32",
+    "content-hash": "86f0335a5b03e362a0eba94b71c0bf5d",
     "packages": [
         {
             "name": "cache/cache",
@@ -961,11 +961,11 @@
         },
         {
             "name": "google/cloud",
-            "version": "dev-request_tracing",
+            "version": "dev-tracing",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chingor13/google-cloud-php",
-                "reference": "544eeb213675fc1f6ba7c9c76ccd94f7a67429ce"
+                "reference": "6e034a77b7fb86694f847788303e9b04eeaae034"
             },
             "require": {
                 "google/auth": "^0.11",
@@ -979,8 +979,7 @@
             "require-dev": {
                 "erusev/parsedown": "^1.6",
                 "google/gax": "^0.8",
-                "google/proto-client-php": "^0.9",
-                "james-heinrich/getid3": "^1.9",
+                "google/proto-client-php": "^0.11",
                 "league/json-guard": "^0.3",
                 "phpdocumentor/reflection": "^3.0",
                 "phpunit/phpunit": "4.8.*",
@@ -990,8 +989,7 @@
             },
             "suggest": {
                 "google/gax": "Required to support gRPC",
-                "google/proto-client-php": "Required to support gRPC",
-                "james-heinrich/getid3": "Allows the Google Cloud Speech client to determine sample rate and encoding of audio inputs"
+                "google/proto-client-php": "Required to support gRPC"
             },
             "type": "library",
             "extra": {
@@ -1046,6 +1044,7 @@
                 "google apis client",
                 "google cloud",
                 "google cloud platform",
+                "language",
                 "natural language",
                 "pub sub",
                 "pubsub",
@@ -1056,7 +1055,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2017-03-30 16:58:04"
+            "time": "2017-04-18 18:43:56"
         },
         {
             "name": "guzzlehttp/guzzle",

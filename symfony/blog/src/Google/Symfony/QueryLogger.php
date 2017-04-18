@@ -28,6 +28,6 @@ class QueryLogger implements SQLLogger
      */
     public function stopQuery()
     {
-        RequestTracer::finishSpan();
+        RequestTracer::endSpan();
     }
 }

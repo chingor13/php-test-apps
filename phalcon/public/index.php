@@ -7,8 +7,6 @@ use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 
-
-
 // Register an autoloader
 $loader = new Loader();
 
@@ -21,7 +19,12 @@ $loader->registerDirs(
 
 $loader->register();
 
+require_once __DIR__ . "/../vendor/autoload.php";
 
+// setup tracing
+$traceClient = new Google\Cloud\Trace\TraceClient();
+$reporter = new Google\Cloud\Trace\Reporter\SyncReporter($traceClient);
+Google\Cloud\Trace\RequestTracer::start($reporter);
 
 // Create a DI
 $di = new FactoryDefault();
