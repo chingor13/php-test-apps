@@ -8,7 +8,14 @@
         }
     ],
     "require": {
-        "php": "5.6.*",
-        "ext-phalcon": "*"
-    }
+        "php": "7.0.*",
+        "ext-phalcon": "*",
+        "google/cloud": "dev-request_tracing"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/chingor13/google-cloud-php"
+        }
+    ]
 }
