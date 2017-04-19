@@ -11,3 +11,4 @@ runtime_config:
 
 env_variables:
   WHITELIST_FUNCTIONS: escapeshellarg,escapeshellcmd,exec,pclose,popen,shell_exec,phpversion,php_uname
+  IS_BATCH_DAEMON_RUNNING: true
