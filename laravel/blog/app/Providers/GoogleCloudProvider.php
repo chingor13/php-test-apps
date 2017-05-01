@@ -9,6 +9,7 @@ use Google\Cloud\Trace\RequestTracer;
 use Google\Cloud\Trace\Reporter\EchoReporter;
 use Google\Cloud\Trace\Reporter\FileReporter;
 use Google\Cloud\Trace\Reporter\SyncReporter;
+use Google\Cloud\Trace\Reporter\AsyncReporter;
 use Google\Cloud\Trace\Reporter\ReporterInterface;
 use Google\Cloud\Trace\Sampler\SamplerInterface;
 use Google\Cloud\Trace\Sampler\QpsSampler;
@@ -69,12 +70,16 @@ class GoogleCloudProvider extends ServiceProvider
         $this->app->singleton(ReporterInterface::class, function($app) {
             // return new FileReporter("/tmp/spans.log");
             // return new EchoReporter();
-            return new SyncReporter($app->make(TraceClient::class));
+            // return new SyncReporter($app->make(TraceClient::class));
+            return new AsyncReporter([
+                'clientConfig' => $app['config']['services']['google'],
+                'debugOutput' => true
+            ]);
         });
         $this->app->singleton(SamplerInterface::class, function($app) {
             return new QpsSampler(
                 $app->make(CacheItemPoolInterface::class),
-                get_class($app->make(CacheItemInterface::class))
+                ['cacheItemClass' => get_class($app->make(CacheItemInterface::class))]
             );
         });
     }

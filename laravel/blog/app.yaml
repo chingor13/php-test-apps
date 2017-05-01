@@ -13,6 +13,7 @@ beta_settings:
   cloud_sql_instances: chingor-php-gcs:us-central1:php-test-apps
 
 env_variables:
+  IS_BATCH_DAEMON_RUNNING: 'true'
   DB_SOCKET: /cloudsql/chingor-php-gcs:us-central1:php-test-apps
   DB_USERNAME: blog
   DB_PASSWORD: blog
