@@ -13,6 +13,11 @@ use Google\Cloud\Trace\Reporter\AsyncReporter;
 use Google\Cloud\Trace\Reporter\ReporterInterface;
 use Google\Cloud\Trace\Sampler\SamplerInterface;
 use Google\Cloud\Trace\Sampler\QpsSampler;
+use Google\Cloud\Trace\Integrations\Curl;
+use Google\Cloud\Trace\Integrations\Laravel;
+use Google\Cloud\Trace\Integrations\Mysql;
+use Google\Cloud\Trace\Integrations\PDO;
+use Google\Cloud\Trace\Integrations\Guzzle;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\CacheItemInterface;
 use Illuminate\Database\Events\QueryExecuted;
@@ -31,6 +36,12 @@ class GoogleCloudProvider extends ServiceProvider
             return;
         }
 
+        Laravel::load();
+        Mysql::load();
+        PDO::load();
+        Curl::load();
+        // Guzzle::load();
+
         // start the root span
         RequestTracer::start($reporter, [
             'sampler' => $sampler
@@ -39,19 +50,6 @@ class GoogleCloudProvider extends ServiceProvider
         // create a span from the initial start time until now as 'bootstrap'
         RequestTracer::startSpan(['name' => 'bootstrap', 'startTime' => LARAVEL_START]);
         RequestTracer::endSpan();
-
-        // For every Eloquent query execute, create a span with the query as a label
-        \Event::listen(QueryExecuted::class, function(QueryExecuted $event) {
-            $startTime = microtime(true) - $event->time * 0.001;
-            RequestTracer::startSpan([
-                'name' => $event->connectionName,
-                'labels' => [
-                    'query' => $event->sql
-                ],
-                'startTime' => $startTime
-            ]);
-            RequestTracer::endSpan();
-        });
     }
 
     /**
@@ -70,11 +68,11 @@ class GoogleCloudProvider extends ServiceProvider
         $this->app->singleton(ReporterInterface::class, function($app) {
             // return new FileReporter("/tmp/spans.log");
             // return new EchoReporter();
-            // return new SyncReporter($app->make(TraceClient::class));
-            return new AsyncReporter([
-                'clientConfig' => $app['config']['services']['google'],
-                'debugOutput' => true
-            ]);
+            return new SyncReporter($app->make(TraceClient::class));
+            // return new AsyncReporter([
+            //     'clientConfig' => $app['config']['services']['google'],
+            //     'debugOutput' => true
+            // ]);
         });
         $this->app->singleton(SamplerInterface::class, function($app) {
             return new QpsSampler(

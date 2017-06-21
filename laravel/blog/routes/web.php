@@ -26,3 +26,6 @@ Route::get('/logout', 'SessionsController@destroy');
 
 Route::get('/error', 'ErrorController@index');
 Route::get('/env', 'EnvironmentController@index');
+
+Route::get('/nested/parent', 'NestedController@parent');
+Route::get('/nested/child', 'NestedController@child');

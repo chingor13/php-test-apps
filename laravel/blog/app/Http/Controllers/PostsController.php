@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Google\Cloud\Trace\RequestTracer;
+use Google\Cloud\Trace\TraceClient;
 
 class PostsController extends Controller
 {
@@ -13,8 +14,10 @@ class PostsController extends Controller
         $this->middleware('auth')->except('index', 'show');
     }
 
-    public function index()
+    public function index(TraceClient $client)
     {
+        $traces = $client->traces();
+
         $posts = Post::latest()->get();
         return view('posts.index', compact('posts'));
     }
