@@ -21,9 +21,7 @@ class NestedController extends Controller
         $stack->push(new TraceContextMiddleware());
         $client = new Client(['handler' => $stack]);
 
-        // $url = 'https://' . $_SERVER['HTTP_HOST'] . '/nested/child';
-        $url = 'https://requestb.in/1dlrmon1';
-        // var_dump($url);
+        $url = 'https://' . $_SERVER['HTTP_HOST'] . '/nested/child';
         $client->get($url);
 
         return response()->json([
