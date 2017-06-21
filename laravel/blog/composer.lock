@@ -245,7 +245,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chingor13/google-cloud-php",
-                "reference": "6be610b43a123ef9e0c553c7ace6f5a696e74d51"
+                "reference": "527e386d8154acb01495504943c58f86ce6ce3fa"
             },
             "require": {
                 "google/auth": "^0.11",
@@ -343,7 +343,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2017-06-21 21:07:28"
+            "time": "2017-06-21 21:42:02"
         },
         {
             "name": "guzzlehttp/guzzle",
