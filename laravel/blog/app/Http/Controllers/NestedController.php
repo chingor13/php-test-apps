@@ -7,7 +7,7 @@ use Google\Cloud\Trace\RequestTracer;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 
-use Google\Cloud\Trace\Integrations\Guzzle\TraceContextMiddleware;
+use Google\Cloud\Trace\Integrations\Guzzle\Middleware;
 
 class NestedController extends Controller
 {
@@ -18,15 +18,16 @@ class NestedController extends Controller
         $stack = new HandlerStack();
         $stack->setHandler(\GuzzleHttp\choose_handler());
 
-        $stack->push(new TraceContextMiddleware());
+        $stack->push(new Middleware());
         $client = new Client(['handler' => $stack]);
 
         $url = 'https://' . $_SERVER['HTTP_HOST'] . '/nested/child';
-        $client->get($url);
+        $resp = $client->get($url);
 
         return response()->json([
             'action' => 'parent',
-            'url' => $url
+            'url' => $url,
+            'code' => $resp->getHeaders()
         ]);
     }
 
