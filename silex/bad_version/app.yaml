@@ -1,0 +1,7 @@
+runtime: php
+env: flex
+
+service: silex
+
+runtime_config:
+  document_root: web
