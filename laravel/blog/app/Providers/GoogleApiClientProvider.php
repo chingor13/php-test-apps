@@ -15,11 +15,11 @@ class GoogleApiClientProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Google_Client::class, function($app) {
+        $this->app->bind(\Google_Client::class, function($app) {
             $http = $app->make(ClientInterface::class);
 
-            $client = new Google_Client();
-            $client->useApplicationDefaultCredentials();
+            $client = new \Google_Client();
+            // $client->useApplicationDefaultCredentials();
             $client->setHttpClient($http);
             return $client;
         });
@@ -28,7 +28,7 @@ class GoogleApiClientProvider extends ServiceProvider
     public function provides()
     {
         return [
-            Google_Client::class
+            \Google_Client::class
         ];
     }
 }

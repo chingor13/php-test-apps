@@ -10,7 +10,11 @@ class BooksController extends Controller
     {
         $books = [];
         if ($query = request('q')) {
+
+            $client->addScope(\Google_Service_Books::BOOKS);
+
             $service = new \Google_Service_Books($client);
+
             $books = array_map(function ($book) {
                 return $book->getVolumeInfo();
             }, $service->volumes->listVolumes($query, [])->getItems());
