@@ -29,3 +29,6 @@ Route::get('/env', 'EnvironmentController@index');
 
 Route::get('/nested/parent', 'NestedController@parent');
 Route::get('/nested/child', 'NestedController@child');
+
+Route::get('/language', 'LanguageController@index');
+Route::post('/language/detect', 'LanguageController@detect');

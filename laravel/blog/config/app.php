@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\CacheItemPoolInterfaceProvider::class,
+        App\Providers\GuzzleProvider::class,
         App\Providers\GoogleCloudProvider::class,
 
     ],

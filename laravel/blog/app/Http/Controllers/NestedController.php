@@ -3,24 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Google\Cloud\Trace\RequestTracer;
-use GuzzleHttp\Client;
-use GuzzleHttp\HandlerStack;
+use GuzzleHttp\ClientInterface;
 
 use Google\Cloud\Trace\Integrations\Guzzle\Middleware;
 
 class NestedController extends Controller
 {
 
-    public function parent()
+    public function parent(ClientInterface $client)
     {
-        // create a guzzle client
-        $stack = new HandlerStack();
-        $stack->setHandler(\GuzzleHttp\choose_handler());
-
-        $stack->push(new Middleware());
-        $client = new Client(['handler' => $stack]);
-
         $url = 'https://' . $_SERVER['HTTP_HOST'] . '/nested/child';
         $resp = $client->get($url);
 
