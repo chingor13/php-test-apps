@@ -2,6 +2,7 @@
     "name": "chingor/silex",
     "type": "project",
     "require": {
+        "php": "^7.0",
         "silex/silex": "~2.0",
         "twig/twig": "^2.3",
         "guzzlehttp/guzzle": "~6.0"

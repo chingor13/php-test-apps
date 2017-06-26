@@ -7,6 +7,7 @@ use Google\Cloud\Trace\RequestTracer;
 use Google\Cloud\Trace\Reporter\SyncReporter;
 use Google\Cloud\Trace\Reporter\EchoReporter;
 use Google\Cloud\Trace\Sampler\QpsSampler;
+use Google\Cloud\Trace\Integrations\Symfony;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -19,6 +20,8 @@ class GoogleBundle extends Bundle
         if (php_sapi_name() == 'cli') {
             return;
         }
+
+        Symfony::load();
 
         if (!defined('SYMFONY_START')) {
             trigger_error('Please define \'SYMFONY_START\' in your `autoload.php`', E_USER_WARNING);
