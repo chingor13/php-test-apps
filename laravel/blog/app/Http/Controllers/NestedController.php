@@ -7,7 +7,7 @@ use Google\Cloud\Trace\RequestTracer;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 
-use Google\Cloud\Trace\Integrations\Guzzle\Middleware;
+use Google\Cloud\Trace\Integrations\Guzzle\EventSubscriber;
 
 class NestedController extends Controller
 {
@@ -15,11 +15,9 @@ class NestedController extends Controller
     public function parent()
     {
         // create a guzzle client
-        $stack = new HandlerStack();
-        $stack->setHandler(\GuzzleHttp\choose_handler());
-
-        $stack->push(new Middleware());
-        $client = new Client(['handler' => $stack]);
+        $client = new Client();
+        $subscriber = new EventSubscriber();
+        $client->getEmitter()->attach($subscriber);
 
         $url = 'https://' . $_SERVER['HTTP_HOST'] . '/nested/child';
         $resp = $client->get($url);
