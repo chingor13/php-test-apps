@@ -18,7 +18,7 @@ class LanguageController extends Controller
     public function detect(TranslateClient $client)
     {
         $sentence = request('sentence');
-        $result = RequestTracer::inSpan(['name' => 'translate', 'labels' => ['foo' => 'bar']], function () use ($client, $sentence) {
+        $result = RequestTracer::inSpan(['name' => 'detect', 'labels' => ['foo' => 'bar']], function () use ($client, $sentence) {
             return $client->detectLanguage($sentence);
         });
         return view('language.detect', ['result' => $result]);

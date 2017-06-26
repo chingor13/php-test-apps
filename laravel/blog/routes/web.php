@@ -32,3 +32,5 @@ Route::get('/nested/child', 'NestedController@child');
 
 Route::get('/language', 'LanguageController@index');
 Route::post('/language/detect', 'LanguageController@detect');
+
+Route::get('/books', 'BooksController@index');

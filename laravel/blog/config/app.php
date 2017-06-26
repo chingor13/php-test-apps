@@ -179,6 +179,7 @@ return [
         App\Providers\CacheItemPoolInterfaceProvider::class,
         App\Providers\GuzzleProvider::class,
         App\Providers\GoogleCloudProvider::class,
+        App\Providers\GoogleApiClientProvider::class,
 
     ],
 

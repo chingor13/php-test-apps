@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
 {
@@ -32,6 +33,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        $logging = new LoggingClient();
+        $log = $logging->psrLogger('application-errors');
+        $log->error($exception->getMessage());
+        Log::error($exception->getMessage());
         parent::report($exception);
     }
 

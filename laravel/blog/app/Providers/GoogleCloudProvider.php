@@ -44,7 +44,7 @@ class GoogleCloudProvider extends ServiceProvider
         Mysql::load();
         PDO::load();
         Curl::load();
-        Guzzle::load();
+        // Guzzle::load();
 
         // start the root span
         RequestTracer::start($reporter, [
