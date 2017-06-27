@@ -15,9 +15,7 @@ class BooksController extends Controller
 
             $service = new \Google_Service_Books($client);
 
-            $books = array_map(function ($book) {
-                return $book->getVolumeInfo();
-            }, $service->volumes->listVolumes($query, [])->getItems());
+            $books = $service->volumes->listVolumes($query, [])->getItems();
         }
 
         return view('books.index', ['books' => $books]);
