@@ -3,7 +3,7 @@
 @section ('content')
 
 
-<form method="POST" action="/books">
+<form method="GET" action="/books">
     <div class="form-group">
         <label for="q">Search</label>
         <input type="text" class="form-control" id="q" name="q">
