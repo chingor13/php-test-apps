@@ -1,0 +1,10 @@
+runtime: php
+env: flex
+
+service: silex
+
+runtime_config:
+  document_root: web
+
+env_variables:
+  IS_BATCH_DAEMON_RUNNING: 'true'
