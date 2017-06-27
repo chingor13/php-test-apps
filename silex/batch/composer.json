@@ -6,12 +6,12 @@
         "silex/silex": "~2.0",
         "twig/twig": "^2.3",
         "guzzlehttp/guzzle": "~6.0",
-        "google/cloud": "dev-batch"
+        "google/cloud": "dev-batch-publisher"
     },
     "repositories": [
         {
             "type": "git",
-            "url": "https://github.com/GoogleCloudPlatform/google-cloud-php"
+            "url": "https://github.com/dwsupplee/gcloud-php"
         }
     ],
     "authors": [

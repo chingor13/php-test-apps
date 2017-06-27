@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8808afc1b7a9f6d86b2fa2836c3227d",
+    "content-hash": "170f9edab468c012542b1ee6679b7d71",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -99,11 +99,11 @@
         },
         {
             "name": "google/cloud",
-            "version": "dev-batch",
+            "version": "dev-batch-publisher",
             "source": {
                 "type": "git",
-                "url": "https://github.com/GoogleCloudPlatform/google-cloud-php",
-                "reference": "81319933b4c914d5b4bb00c88712c07437c73822"
+                "url": "https://github.com/dwsupplee/gcloud-php",
+                "reference": "d03b6a1afdf74aa035471085aac67def630e4388"
             },
             "require": {
                 "google/auth": "^1.0",
@@ -204,7 +204,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2017-06-26 10:29:25"
+            "time": "2017-06-27 17:40:08"
         },
         {
             "name": "guzzlehttp/guzzle",
