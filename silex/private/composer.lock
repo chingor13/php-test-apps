@@ -4,15 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c669c0e16a4d7b94e5276a1c6016b9d9",
+    "content-hash": "d3e86dde4b822e9b2fd41ec2ba726380",
     "packages": [
+        {
+            "name": "chingor13/gitlab_private",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.com:chingor13/gitlab_private.git",
+                "reference": "32932dee5adedfd06154780661c178be4233d6e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v3/projects/chingor13%2Fgitlab%5Fprivate/repository/archive.zip?sha=32932dee5adedfd06154780661c178be4233d6e2",
+                "reference": "32932dee5adedfd06154780661c178be4233d6e2",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GitlabPrivate\\": "src"
+                }
+            },
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jeff Ching",
+                    "email": "chingor@google.com"
+                }
+            ],
+            "time": "2017-06-28T16:16:13+00:00"
+        },
         {
             "name": "chingor13/private_git",
             "version": "dev-master",
             "source": {
-                "type": "git",
+                "type": "hg",
                 "url": "https://bitbucket.org/chingor13/private_git",
                 "reference": "47757b33173fa47e1fda46cc0315354c4e31f499"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/chingor13/private_git/get/47757b33173fa47e1fda46cc0315354c4e31f499.zip",
+                "reference": "47757b33173fa47e1fda46cc0315354c4e31f499",
+                "shasum": ""
             },
             "type": "library",
             "autoload": {
@@ -29,7 +66,10 @@
                     "email": "chingor@google.com"
                 }
             ],
-            "time": "2017-06-28 20:57:46"
+            "support": {
+                "source": "https://bitbucket.org/chingor13/private_git/src/47757b33173fa47e1fda46cc0315354c4e31f499/?at=master"
+            },
+            "time": "2017-06-28T22:57:46+00:00"
         },
         {
             "name": "chingor13/private_hg",
@@ -978,7 +1018,8 @@
     "stability-flags": {
         "chingor13/private_package": 20,
         "chingor13/private_git": 20,
-        "chingor13/private_hg": 20
+        "chingor13/private_hg": 20,
+        "chingor13/gitlab_private": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

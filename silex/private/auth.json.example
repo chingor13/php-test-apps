@@ -2,6 +2,9 @@
   "github-oauth": {
     "github.com": "<your-github-auth-token>"
   },
+  "gitlab-token": {
+    "gitlab.com": "<your-gitlab-personal-token>"
+  },
   "bitbucket-oauth": {
     "bitbucket.org": {
       "consumer-key": "<your-oauth-consumer-key>",
