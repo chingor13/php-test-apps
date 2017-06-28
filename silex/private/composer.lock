@@ -4,8 +4,33 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cbadeedba4ca93f455f73c3f685b275",
+    "content-hash": "38352b58e2f62950e4805f0992f2f297",
     "packages": [
+        {
+            "name": "chingor13/private_git",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/chingor13/private_git",
+                "reference": "47757b33173fa47e1fda46cc0315354c4e31f499"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PrivateGit\\": "src"
+                }
+            },
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jeff Ching",
+                    "email": "chingor@google.com"
+                }
+            ],
+            "time": "2017-06-28 20:57:46"
+        },
         {
             "name": "chingor13/private_package",
             "version": "dev-master",
@@ -917,7 +942,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "chingor13/private_package": 20
+        "chingor13/private_package": 20,
+        "chingor13/private_git": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

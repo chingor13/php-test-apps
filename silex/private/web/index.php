@@ -10,7 +10,8 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get('/', function() {
     $c = new PrivatePackage\MyClass();
-    return $c->hello('guest');
+    $f = new PrivateGit\Foo();
+    return $c->hello('guest') . $f->bar();
 });
 
 $app->get('/hello/{name}', function ($name) use ($app) {

@@ -6,12 +6,17 @@
         "silex/silex": "~2.0",
         "twig/twig": "^2.3",
         "guzzlehttp/guzzle": "~6.0",
-        "chingor13/private_package": "dev-master"
+        "chingor13/private_package": "dev-master",
+        "chingor13/private_git": "dev-master"
     },
     "repositories": [
         {
             "type": "vcs",
             "url": "https://github.com/chingor13/private_package"
+        },
+        {
+            "type": "git",
+            "url":  "https://bitbucket.org/chingor13/private_git"
         }
     ],
     "authors": [
