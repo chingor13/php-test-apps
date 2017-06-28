@@ -5,7 +5,7 @@
   "bitbucket-oauth": {
     "bitbucket.org": {
       "consumer-key": "<your-oauth-consumer-key>",
-      "consumer-secret": "your-oauth-consumer-secret"
+      "consumer-secret": "<your-oauth-consumer-secret>"
     }
   }
 }
