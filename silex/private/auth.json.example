@@ -1,0 +1,11 @@
+{
+  "github-oauth": {
+    "github.com": "<your-github-auth-token>"
+  },
+  "bitbucket-oauth": {
+    "bitbucket.org": {
+      "consumer-key": "<your-oauth-consumer-key>",
+      "consumer-secret": "your-oauth-consumer-secret"
+    }
+  }
+}

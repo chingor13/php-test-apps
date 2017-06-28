@@ -11,7 +11,8 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app->get('/', function() {
     $c = new PrivatePackage\MyClass();
     $f = new PrivateGit\Foo();
-    return $c->hello('guest') . $f->bar();
+    $f2 = new PrivateHg\Foo();
+    return $c->hello('guest') . $f->bar() . $f2->bar();
 });
 
 $app->get('/hello/{name}', function ($name) use ($app) {

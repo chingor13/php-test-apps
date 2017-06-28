@@ -7,7 +7,8 @@
         "twig/twig": "^2.3",
         "guzzlehttp/guzzle": "~6.0",
         "chingor13/private_package": "dev-master",
-        "chingor13/private_git": "dev-master"
+        "chingor13/private_git": "dev-master",
+        "chingor13/private_hg": "dev-master"
     },
     "repositories": [
         {
@@ -17,6 +18,10 @@
         {
             "type": "git",
             "url":  "https://bitbucket.org/chingor13/private_git"
+        },
+        {
+            "type": "vcs",
+            "url":  "https://bitbucket.org/chingor13/private_hg"
         }
     ],
     "authors": [

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "38352b58e2f62950e4805f0992f2f297",
+    "content-hash": "c669c0e16a4d7b94e5276a1c6016b9d9",
     "packages": [
         {
             "name": "chingor13/private_git",
@@ -30,6 +30,40 @@
                 }
             ],
             "time": "2017-06-28 20:57:46"
+        },
+        {
+            "name": "chingor13/private_hg",
+            "version": "dev-default",
+            "source": {
+                "type": "hg",
+                "url": "https://bitbucket.org/chingor13/private_hg",
+                "reference": "cb789658f557cbba19bedfdf59323d927ba9ea9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/chingor13/private_hg/get/cb789658f557cbba19bedfdf59323d927ba9ea9e.zip",
+                "reference": "cb789658f557cbba19bedfdf59323d927ba9ea9e",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PrivateHg\\": "src"
+                }
+            },
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jeff Ching",
+                    "email": "chingor@google.com"
+                }
+            ],
+            "support": {
+                "source": "https://bitbucket.org/chingor13/private_hg/src/cb789658f557cbba19bedfdf59323d927ba9ea9e/?at=default"
+            },
+            "time": "2017-06-28T23:26:53+00:00"
         },
         {
             "name": "chingor13/private_package",
@@ -943,7 +977,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "chingor13/private_package": 20,
-        "chingor13/private_git": 20
+        "chingor13/private_git": 20,
+        "chingor13/private_hg": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
