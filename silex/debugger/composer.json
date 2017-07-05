@@ -1,0 +1,22 @@
+{
+    "name": "chingor/silex",
+    "type": "project",
+    "require": {
+        "php": "^7.0",
+        "silex/silex": "~2.0",
+        "twig/twig": "^2.3",
+        "google/cloud": "dev-debugger"
+    },
+    "authors": [
+        {
+            "name": "Jeff Ching",
+            "email": "chingor@google.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../../google-cloud-php"
+        }
+    ]
+}
