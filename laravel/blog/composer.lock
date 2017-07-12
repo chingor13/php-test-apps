@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f607e86dc7d46f92e2252b54714eba68",
+    "content-hash": "c07d7664500764bfde755cf89a67f059",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -341,7 +341,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chingor13/google-cloud-php",
-                "reference": "7b5dd44a3a7bb9ad19b04676407202f854d07059"
+                "reference": "ce5c61d9c708b11d3ee2e063acc1d503f6191fb8"
             },
             "require": {
                 "google/auth": "^1.0",
@@ -445,7 +445,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2017-07-12 18:30:32"
+            "time": "2017-07-12 20:07:40"
         },
         {
             "name": "google/gax",
@@ -4293,7 +4293,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6.4"
+        "php": ">=5.6.4",
+        "ext-grpc": "*"
     },
     "platform-dev": []
 }
