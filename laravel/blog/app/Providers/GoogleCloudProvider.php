@@ -98,7 +98,9 @@ class GoogleCloudProvider extends ServiceProvider
             );
         });
         $this->app->singleton(PubSubClient::class, function($app) {
-            return $app->make(ServiceBuilder::class)->pubsub(['transport' => 'grpc']);
+            return new PubSubClient([
+                'transport' => 'grpc'
+            ]);
         });
     }
 

@@ -17,22 +17,7 @@ class PostsController extends Controller
 
     public function index(TraceClient $client, PubSubClient $pubsub)
     {
-        $traces = $client->traces();
-        foreach ($traces as $trace) {
-
-        }
-
         $posts = Post::latest()->get();
-
-        $topic = $pubsub->topic('test-topic');
-        $topic->publish([
-            'data' => 'Homepage hit',
-            'attributes' => [
-                'id' => '1',
-                'userName' => 'John',
-                'location' => 'Detroit'
-            ]
-        ]);
 
         return view('posts.index', compact('posts'));
     }
