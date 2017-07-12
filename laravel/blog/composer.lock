@@ -341,7 +341,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chingor13/google-cloud-php",
-                "reference": "ce5c61d9c708b11d3ee2e063acc1d503f6191fb8"
+                "reference": "2c56a2b5c0b9b07b8db237f0d17127d18001df47"
             },
             "require": {
                 "google/auth": "^1.0",
@@ -445,7 +445,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2017-07-12 20:07:40"
+            "time": "2017-07-12 21:20:30"
         },
         {
             "name": "google/gax",
