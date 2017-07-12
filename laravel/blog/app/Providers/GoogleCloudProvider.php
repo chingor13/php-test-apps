@@ -20,7 +20,9 @@ use Google\Cloud\Trace\Integrations\Laravel;
 use Google\Cloud\Trace\Integrations\Mysql;
 use Google\Cloud\Trace\Integrations\PDO;
 use Google\Cloud\Trace\Integrations\Guzzle;
+use Google\Cloud\Trace\Integrations\Grpc;
 use Google\Cloud\Translate\TranslateClient;
+use Google\Cloud\PubSub\PubSubClient;
 use GuzzleHttp\ClientInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\CacheItemInterface;
@@ -44,6 +46,7 @@ class GoogleCloudProvider extends ServiceProvider
         Mysql::load();
         PDO::load();
         Curl::load();
+        Grpc::load();
         // Guzzle::load();
 
         // start the root span
@@ -80,11 +83,12 @@ class GoogleCloudProvider extends ServiceProvider
         $this->app->singleton(ReporterInterface::class, function($app) {
             // return new FileReporter("/tmp/spans.log");
             // return new EchoReporter();
-            return new SyncReporter($app->make(TraceClient::class));
-            // return new AsyncReporter([
-            //     'clientConfig' => $app['config']['services']['google'],
-            //     'debugOutput' => true
-            // ]);
+            // return new SyncReporter($app->make(TraceClient::class));
+            return new AsyncReporter([
+                'clientConfig' => $app['config']['services']['google'],
+                'debugOutput' => true
+            ]);
+            return $app->make(TraceClient::class)->reporter();
         });
         $this->app->singleton(SamplerInterface::class, function($app) {
             // return new AlwaysOnSampler();
@@ -92,6 +96,9 @@ class GoogleCloudProvider extends ServiceProvider
                 $app->make(CacheItemPoolInterface::class),
                 ['cacheItemClass' => get_class($app->make(CacheItemInterface::class))]
             );
+        });
+        $this->app->singleton(PubSubClient::class, function($app) {
+            return $app->make(ServiceBuilder::class)->pubsub(['transport' => 'grpc']);
         });
     }
 
@@ -102,7 +109,8 @@ class GoogleCloudProvider extends ServiceProvider
             TraceClient::class,
             ReporterInterface::class,
             SamplerInterface::class,
-            TranslateClient::class
+            TranslateClient::class,
+            PubSubClient::class
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use Google\Cloud\Trace\RequestTracer;
 use Google\Cloud\Trace\TraceClient;
+use Google\Cloud\PubSub\PubSubClient;
 
 class PostsController extends Controller
 {
@@ -14,11 +15,25 @@ class PostsController extends Controller
         $this->middleware('auth')->except('index', 'show');
     }
 
-    public function index(TraceClient $client)
+    public function index(TraceClient $client, PubSubClient $pubsub)
     {
         $traces = $client->traces();
+        foreach ($traces as $trace) {
+
+        }
 
         $posts = Post::latest()->get();
+
+        $topic = $pubsub->topic('test-topic');
+        $topic->publish([
+            'data' => 'Homepage hit',
+            'attributes' => [
+                'id' => '1',
+                'userName' => 'John',
+                'location' => 'Detroit'
+            ]
+        ]);
+
         return view('posts.index', compact('posts'));
     }
 
