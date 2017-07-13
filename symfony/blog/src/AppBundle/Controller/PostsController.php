@@ -31,4 +31,17 @@ class PostsController extends Controller
             'post' => $post
         ]);
     }
+
+    /**
+     * @Route("/postsByUser/{userId}", name="posts.byUser")
+     */
+    public function postsByUserAction($userId)
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Posts');
+        $posts = $repository->findBy(['userId' => $userId]);
+
+        return $this->render('posts/index.html.twig', [
+            'posts' => $posts
+        ]);
+    }
 }

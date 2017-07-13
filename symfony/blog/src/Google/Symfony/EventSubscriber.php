@@ -6,6 +6,7 @@ use Google\Cloud\Trace\RequestTracer;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\FilterControllerArgumentsEvent;
 use Symfony\Component\HttpKernel\Event\FinishRequestEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
@@ -16,11 +17,23 @@ class EventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::REQUEST => 'processRequest',
-            KernelEvents::CONTROLLER => 'processController',
-            KernelEvents::VIEW => 'processView',
-            KernelEvents::FINISH_REQUEST => 'processFinish'
+            KernelEvents::CONTROLLER_ARGUMENTS => 'handleArguments'
+            // KernelEvents::REQUEST => 'processRequest',
+            // KernelEvents::CONTROLLER => 'processController',
+            // KernelEvents::VIEW => 'processView',
+            // KernelEvents::FINISH_REQUEST => 'processFinish'
         ];
+    }
+
+    public function handleArguments(FilterControllerArgumentsEvent $event)
+    {
+        $controller = $event->getController();
+        if (is_array($controller)) {
+            RequestTracer::instance()->tracer()->addRootLabel('controller', get_class($controller[0]));
+            RequestTracer::instance()->tracer()->addRootLabel('action', $controller[1]);
+        } else {
+            RequestTracer::instance()->tracer()->addRootLabel('controller', '(closure)');
+        }
     }
 
     public function processRequest(GetResponseEvent $event)
