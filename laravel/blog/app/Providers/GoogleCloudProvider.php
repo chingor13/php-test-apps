@@ -27,6 +27,7 @@ use GuzzleHttp\ClientInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\CacheItemInterface;
 use Illuminate\Database\Events\QueryExecuted;
+use Google\Cloud\Trace\Integrations\Guzzle\Middleware;
 
 class GoogleCloudProvider extends ServiceProvider
 {
@@ -66,6 +67,13 @@ class GoogleCloudProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind(Middleware::class, function () {
+            return new Middleware();
+        });
+        $this->app->tag([
+            Middleware::class
+        ], 'guzzle.middleware');
+
         $this->app->singleton(ServiceBuilder::class, function($app) {
             $client = $app->make(ClientInterface::class);
             $handler = HttpHandlerFactory::build($client);

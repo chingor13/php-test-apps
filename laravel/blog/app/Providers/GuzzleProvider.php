@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Google\Cloud\Trace\Integrations\Guzzle\Middleware;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
@@ -21,7 +20,10 @@ class GuzzleProvider extends ServiceProvider
             $stack = new HandlerStack();
             $stack->setHandler(\GuzzleHttp\choose_handler());
 
-            $stack->push(new Middleware());
+            foreach ($this->app->tagged('guzzle.middleware') as $middleware) {
+                $stack->push($middleware);
+            }
+
             return new Client(['handler' => $stack]);
         });
     }
