@@ -23,11 +23,12 @@ use Google\Cloud\Trace\Integrations\Guzzle;
 use Google\Cloud\Trace\Integrations\Grpc;
 use Google\Cloud\Translate\TranslateClient;
 use Google\Cloud\PubSub\PubSubClient;
-use GuzzleHttp\ClientInterface;
+use GuzzleHttp\ClientInterface as GuzzleClient;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\CacheItemInterface;
 use Illuminate\Database\Events\QueryExecuted;
 use Google\Cloud\Trace\Integrations\Guzzle\Middleware;
+use App\GoogleCloudConfig;
 
 class GoogleCloudProvider extends ServiceProvider
 {
@@ -75,11 +76,8 @@ class GoogleCloudProvider extends ServiceProvider
         ], 'guzzle.middleware');
 
         $this->app->singleton(ServiceBuilder::class, function($app) {
-            $client = $app->make(ClientInterface::class);
-            $handler = HttpHandlerFactory::build($client);
-            $config = $app['config']['services']['google'] + [
-                'httpHandler' => $handler
-            ];
+            $config = new GoogleCloudConfig();
+            $config = $app['config']['services']['google'] + $config->getConfigAsArray();
             return new ServiceBuilder($config);
         });
         $this->app->singleton(TraceClient::class, function($app) {
@@ -89,13 +87,6 @@ class GoogleCloudProvider extends ServiceProvider
             return $app->make(ServiceBuilder::class)->translate();
         });
         $this->app->singleton(ReporterInterface::class, function($app) {
-            // return new FileReporter("/tmp/spans.log");
-            // return new EchoReporter();
-            // return new SyncReporter($app->make(TraceClient::class));
-            return new AsyncReporter([
-                'clientConfig' => $app['config']['services']['google'],
-                'debugOutput' => true
-            ]);
             return $app->make(TraceClient::class)->reporter();
         });
         $this->app->singleton(SamplerInterface::class, function($app) {
@@ -106,9 +97,7 @@ class GoogleCloudProvider extends ServiceProvider
             );
         });
         $this->app->singleton(PubSubClient::class, function($app) {
-            return new PubSubClient([
-                'transport' => 'grpc'
-            ]);
+            return $app->make(ServiceBuilder::class)->pubsub();
         });
     }
 
