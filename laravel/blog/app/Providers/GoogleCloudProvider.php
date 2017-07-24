@@ -29,6 +29,7 @@ use Psr\Cache\CacheItemInterface;
 use Illuminate\Database\Events\QueryExecuted;
 use Google\Cloud\Trace\Integrations\Guzzle\Middleware;
 use App\GoogleCloudConfig;
+use Google\Cloud\Core\Batch\BatchRunner;
 
 class GoogleCloudProvider extends ServiceProvider
 {
@@ -49,7 +50,14 @@ class GoogleCloudProvider extends ServiceProvider
         PDO::load();
         Curl::load();
         Grpc::load();
-        // Guzzle::load();
+
+        stackdriver_trace_method(BatchRunner::class, 'submitItem', function ($batchRunner, $identifier, $item) {
+            return [
+                'labels' => [
+                    'identifier' => $identifier
+                ]
+            ];
+        });
 
         // start the root span
         RequestTracer::start($reporter, [
@@ -90,14 +98,17 @@ class GoogleCloudProvider extends ServiceProvider
             return $app->make(TraceClient::class)->reporter();
         });
         $this->app->singleton(SamplerInterface::class, function($app) {
-            // return new AlwaysOnSampler();
+            return new AlwaysOnSampler();
             return new QpsSampler(
                 $app->make(CacheItemPoolInterface::class),
                 ['cacheItemClass' => get_class($app->make(CacheItemInterface::class))]
             );
         });
         $this->app->singleton(PubSubClient::class, function($app) {
-            return $app->make(ServiceBuilder::class)->pubsub();
+            return new PubSubClient([
+                'transport' => 'grpc'
+            ]);
+            // return $app->make(ServiceBuilder::class)->pubsub();
         });
     }
 
