@@ -6,28 +6,30 @@ use Illuminate\Support\ServiceProvider;
 use Google\Auth\HttpHandler\HttpHandlerFactory;
 use Google\Cloud\ServiceBuilder;
 use Google\Cloud\Trace\TraceClient;
-use Google\Cloud\Trace\RequestTracer;
-use Google\Cloud\Trace\Reporter\EchoReporter;
-use Google\Cloud\Trace\Reporter\FileReporter;
-use Google\Cloud\Trace\Reporter\SyncReporter;
-use Google\Cloud\Trace\Reporter\AsyncReporter;
-use Google\Cloud\Trace\Reporter\ReporterInterface;
-use Google\Cloud\Trace\Sampler\SamplerInterface;
-use Google\Cloud\Trace\Sampler\AlwaysOnSampler;
-use Google\Cloud\Trace\Sampler\QpsSampler;
-use Google\Cloud\Trace\Integrations\Curl;
-use Google\Cloud\Trace\Integrations\Laravel;
-use Google\Cloud\Trace\Integrations\Mysql;
-use Google\Cloud\Trace\Integrations\PDO;
-use Google\Cloud\Trace\Integrations\Guzzle;
-use Google\Cloud\Trace\Integrations\Grpc;
+
+use OpenCensus\Trace\RequestTracer;
+use OpenCensus\Trace\Reporter\ReporterInterface;
+use OpenCensus\Trace\Reporter\ZipkinReporter;
+use OpenCensus\Trace\Reporter\GoogleCloudReporter;
+use OpenCensus\Trace\Reporter\EchoReporter;
+use OpenCensus\Trace\Sampler\SamplerInterface;
+use OpenCensus\Trace\Sampler\AlwaysOnSampler;
+use OpenCensus\Trace\Sampler\QpsSampler;
+
+use OpenCensus\Trace\Integrations\Curl;
+use OpenCensus\Trace\Integrations\Laravel;
+use OpenCensus\Trace\Integrations\Mysql;
+use OpenCensus\Trace\Integrations\PDO;
+use OpenCensus\Trace\Integrations\Guzzle;
+use OpenCensus\Trace\Integrations\Grpc;
+use OpenCensus\Trace\Integrations\Guzzle\Middleware;
+
 use Google\Cloud\Translate\TranslateClient;
 use Google\Cloud\PubSub\PubSubClient;
 use GuzzleHttp\ClientInterface as GuzzleClient;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\CacheItemInterface;
 use Illuminate\Database\Events\QueryExecuted;
-use Google\Cloud\Trace\Integrations\Guzzle\Middleware;
 use App\GoogleCloudConfig;
 use Google\Cloud\Core\Batch\BatchRunner;
 
@@ -51,7 +53,7 @@ class GoogleCloudProvider extends ServiceProvider
         Curl::load();
         Grpc::load();
 
-        stackdriver_trace_method(BatchRunner::class, 'submitItem', function ($batchRunner, $identifier, $item) {
+        opencensus_trace_method(BatchRunner::class, 'submitItem', function ($batchRunner, $identifier, $item) {
             return [
                 'labels' => [
                     'identifier' => $identifier
@@ -76,12 +78,12 @@ class GoogleCloudProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(Middleware::class, function () {
-            return new Middleware();
-        });
-        $this->app->tag([
-            Middleware::class
-        ], 'guzzle.middleware');
+        // $this->app->bind(Middleware::class, function () {
+        //     return new Middleware();
+        // });
+        // $this->app->tag([
+        //     Middleware::class
+        // ], 'guzzle.middleware');
 
         $this->app->singleton(ServiceBuilder::class, function($app) {
             $config = new GoogleCloudConfig();
@@ -95,20 +97,21 @@ class GoogleCloudProvider extends ServiceProvider
             return $app->make(ServiceBuilder::class)->translate();
         });
         $this->app->singleton(ReporterInterface::class, function($app) {
-            return $app->make(TraceClient::class)->reporter();
+            $config = new GoogleCloudConfig();
+            $config = $app['config']['services']['google'];// + $config->getConfigAsArray();
+            return new GoogleCloudReporter(['clientConfig' => $config, 'async' => true]);
         });
         $this->app->singleton(SamplerInterface::class, function($app) {
             return new AlwaysOnSampler();
-            return new QpsSampler(
-                $app->make(CacheItemPoolInterface::class),
-                ['cacheItemClass' => get_class($app->make(CacheItemInterface::class))]
-            );
+            // return new QpsSampler(
+            //     $app->make(CacheItemPoolInterface::class),
+            //     ['cacheItemClass' => get_class($app->make(CacheItemInterface::class))]
+            // );
         });
         $this->app->singleton(PubSubClient::class, function($app) {
             return new PubSubClient([
                 'transport' => 'grpc'
             ]);
-            // return $app->make(ServiceBuilder::class)->pubsub();
         });
     }
 

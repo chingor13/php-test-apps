@@ -8,11 +8,12 @@
         "php": ">=5.6.4",
         "ext-grpc": "*",
         "google/apiclient": "^2.0",
-        "google/cloud": "dev-trace-integrations",
+        "google/cloud": "dev-opencensus",
         "google/gax": "~0.21",
         "google/proto-client": "~0.21",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "opencensus/opencensus": "dev-integrations",
         "madewithlove/illuminate-psr-cache-bridge": "^1.0"
     },
     "require-dev": {
@@ -24,6 +25,10 @@
         {
             "type": "git",
             "url": "https://github.com/chingor13/google-cloud-php"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/census-instrumentation/opencensus-php"
         }
     ],
     "autoload": {
