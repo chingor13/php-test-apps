@@ -1,0 +1,15 @@
+{
+    "name": "chingor/oc-apache",
+    "type": "project",
+    "require": {
+        "opencensus/opencensus": "^0.4.2",
+        "google/cloud-trace": "^0.7.1",
+        "php": "^7.0.26"
+    },
+    "authors": [
+        {
+            "name": "Jeff Ching",
+            "email": "chingor@google.com"
+        }
+    ]
+}
